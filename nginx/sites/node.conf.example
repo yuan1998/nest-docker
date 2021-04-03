@@ -1,0 +1,12 @@
+upstream nodejs {
+    server workspace:3000 max_fails=0;
+}
+server {
+    listen 80;
+    listen [::]:80;
+    server_name test.nodedock.test;
+    access_log /var/log/nginx/domain1.access.log;
+    location / {
+        proxy_pass http://nodejs;
+    }
+}
